@@ -5,9 +5,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV='prod' node ./src/server.js",
-    "start:dev": "NODE_ENV='dev' node ./src/server.js",
-    "start:test": "NODE_ENV=test npx nodemon ./src/server.js",
+    "start": "NODE_ENV='prod' node ./src/Server.js",
+    "start:dev": "NODE_ENV='dev' node ./src/Server.js",
+    "start:test": "NODE_ENV=test npx nodemon ./src/Server.js",
     "test": "NODE_ENV=test npx jest",
     "test:watch": "NODE_ENV=test npx jest --watch"
   },
@@ -15,6 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
