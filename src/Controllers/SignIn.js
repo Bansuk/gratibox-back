@@ -20,7 +20,7 @@ async function SignIn(req, res) {
 
     if (user && bcrypt.compareSync(password, user.password)) {
       const token = jwt.sign(
-        { id: user.user_account_id, name: user.name, hasPlan: user.has_plan },
+        { id: user.user_account_id, name: user.name, hasSubscription: user.has_subscription },
         process.env.JWT_SECRET,
         { expiresIn: 900 },
       );
