@@ -1,12 +1,17 @@
 import bcrypt from 'bcrypt';
 import connection from '../Database/Database.js';
+import { signUpSchema } from '../../Validation/Schemes.js';
 
-async function signUp(req, res) {
+async function SignUp(req, res) {
   const { name, email, password } = req.body;
+
+  if (signUpSchema.validate({ name, email, password }).error) {
+    return res.sendStatus(400);
+  }
 
   try {
     const result = await connection.query(
-      'SELECT * FROM users WHERE email = $1;',
+      'SELECT * FROM user_account WHERE email = $1;',
       [email],
     );
 
@@ -15,7 +20,7 @@ async function signUp(req, res) {
     const passwordHash = bcrypt.hashSync(password, 10);
 
     await connection.query(
-      'INSERT INTO users(name, email, password) VALUES ($1, $2, $3);',
+      'INSERT INTO user_account(name, email, password) VALUES ($1, $2, $3);',
       [name, email, passwordHash],
     );
 
@@ -26,4 +31,4 @@ async function signUp(req, res) {
   }
 }
 
-export default signUp;
+export default SignUp;
