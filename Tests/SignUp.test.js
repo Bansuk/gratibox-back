@@ -10,6 +10,7 @@ describe('POST /SIGN-UP', () => {
 
   beforeAll(async () => {
     user = await createUser();
+    await connection.query('DELETE FROM session');
     await connection.query('DELETE FROM user_account');
   });
 
