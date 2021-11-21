@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import faker from 'faker/locale/pt_BR';
 import connection from '../src/Database/Database';
 
-export default async function createUser() {
+async function createUser() {
   const user = {
     name: faker.name.findName(),
     email: faker.internet.email(),
@@ -17,3 +17,5 @@ export default async function createUser() {
 
   return user;
 }
+
+export default createUser;
