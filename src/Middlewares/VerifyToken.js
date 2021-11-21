@@ -1,6 +1,7 @@
 /* eslint-disable dot-notation */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable consistent-return */
+import jwt from 'jsonwebtoken';
 import connection from '../Database/Database.js';
 
 async function verifyToken(req, res, next) {
@@ -8,6 +9,10 @@ async function verifyToken(req, res, next) {
   const token = authorization.split('Bearer ')[1];
 
   if (!token) return res.sendStatus(401);
+
+  jwt.verify(token, process.env.JWT_SECRET, (err) => {
+    if (err) res.sendStatus(401);
+  });
 
   const result = await connection.query(
     `
